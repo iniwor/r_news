@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rotativo Edomex · Generador batch de portadas 4:5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;800&family=Barlow+Condensed:wght@500;600;700&family=Fira+Sans+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{
+  --ink:#0E1013; --press:#171A20; --panel:#1F242C; --line:#2E3540;
+  --paper:#F2F1EC; --mute:#8C97A6; --accent:#E4322B; --signal:#F2C14E;
+  --ok:#87cf85; --bad:#ff7777;
+  --util:'Barlow Condensed','Arial Narrow',sans-serif;
+  --display:'Anton','Arial Narrow',Impact,sans-serif;
+  --body:'Archivo',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--press);color:var(--paper);font-family:var(--body);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit}
+:focus-visible{outline:2px solid var(--signal);outline-offset:2px}
+[hidden]{display:none!important}
+.topbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:14px 22px;background:var(--ink);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50}
+.mark{display:flex;flex-direction:column;line-height:1}
+.mark b{font-family:var(--display);font-size:22px;letter-spacing:.02em;text-transform:uppercase}
+.mark b em{font-style:normal;color:var(--accent)}
+.mark span{font-family:var(--util);font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+.topbar .job{font-family:var(--util);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);border-left:1px solid var(--line);padding-left:18px}
+.topbar .spacer{flex:1}.topbar .status{font-family:var(--util);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.shell{display:grid;grid-template-columns:390px minmax(0,1fr);align-items:start}
+@media(max-width:1100px){.shell{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--panel);border-right:1px solid var(--line);padding:20px;position:sticky;top:64px;max-height:calc(100vh - 64px);overflow-y:auto;min-width:0}
+@media(max-width:1100px){.panel{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line)}}
+.grp{margin-bottom:22px}.grp>label,.grp .lbl{display:block;font-family:var(--util);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:7px}
+.panel input[type=text],.panel textarea,.panel select{width:100%;background:var(--ink);border:1px solid var(--line);color:var(--paper);border-radius:3px;padding:10px 11px;font-size:14px;line-height:1.45}
+.panel textarea{resize:vertical;min-height:150px}.panel input[type=range]{width:100%;accent-color:var(--accent)}
+.hint{font-size:11.5px;color:var(--mute);margin-top:6px;line-height:1.5}.hint code{background:var(--ink);padding:1px 5px;border-radius:3px;color:var(--paper);font-size:11px}
+.sub{font-size:11px;letter-spacing:.12em;color:var(--mute);text-transform:uppercase;font-family:var(--util)}
+.rowpair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}.btns{display:grid;gap:8px}
+.btn{width:100%;border:0;border-radius:3px;padding:12px;cursor:pointer;background:var(--accent);color:#fff;font-family:var(--util);font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+.btn:hover{filter:brightness(1.08)}.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--mute)}.btn.ghost:hover{color:var(--paper);border-color:var(--paper);filter:none}.btn.secondary{background:#34404c;color:var(--paper)}
+.board{padding:26px 26px 60px;min-width:0}.boardhead{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+.card{display:flex;flex-direction:column;gap:10px;min-width:0;width:100%;background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:12px}.cardhead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.cardhead h3{margin:0;font-family:var(--util);font-size:14px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}.cardhead p{margin:3px 0 0;font-size:11.5px;color:var(--mute);word-break:break-word}.stage{width:100%;background:#000;border:1px solid var(--line);border-radius:2px;overflow:hidden;line-height:0}.stage canvas{display:block;width:100%;max-width:100%;height:auto}.cardactions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini{font-size:12px;line-height:1.4;color:#dbe0e6;word-break:break-word}
+.pill{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-family:var(--util);color:var(--mute);white-space:nowrap}.pill.ok{color:var(--ok);border-color:rgba(135,207,133,.35)}.pill.bad{color:var(--bad);border-color:rgba(255,119,119,.35)}
+.empty{padding:28px;border:1px dashed var(--line);border-radius:6px;color:var(--mute);text-align:center;background:rgba(0,0,0,.1)}.smallstatus{font-size:12px;color:var(--mute)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);border:1px solid var(--line);color:var(--paper);padding:12px 18px;border-radius:3px;font-size:13px;z-index:99;opacity:0;pointer-events:none;transition:opacity .2s;max-width:min(620px,90vw)}.toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="mark"><b>Rotativo <em>Edomex</em></b><span>Noticias que conectan</span></div>
+  <div class="job">Batch · 4 noticias · 4:5 · 1080 × 1350</div>
+  <div class="spacer"></div><div class="status" id="status">Listo</div>
+</header>
+<div class="shell">
+<aside class="panel">
+  <div class="grp">
+    <label for="jsonInput">Noticias en JSON</label>
+    <textarea id="jsonInput" spellcheck="false"></textarea>
+    <p class="hint">Cada objeto debe incluir <code>titulo</code>, <code>imagen</code>, <code>seccion</code> y <code>slug</code>. Opcionalmente puede incluir <code>fx</code>, <code>fy</code>, <code>zoom</code> y <code>escala</code>.</p>
+  </div>
+  <div class="grp">
+    <span class="lbl">Plantillas</span>
+    <div class="btnrow"><button class="btn secondary" id="fillExample" type="button">Cargar ejemplo</button><button class="btn ghost" id="clearJson" type="button">Limpiar JSON</button></div>
+  </div>
+  <div class="grp">
+    <span class="lbl">Ajustes globales</span>
+    <div class="rowpair"><div><span class="sub">Horizontal</span><input type="range" id="fx" min="0" max="100" value="50"></div><div><span class="sub">Vertical</span><input type="range" id="fy" min="0" max="100" value="45"></div></div>
+    <span class="sub" style="display:block;margin-top:8px">Acercamiento</span><input type="range" id="zoom" min="100" max="240" value="100">
+    <span class="sub" style="display:block;margin-top:10px">Tamaño del título</span><input type="range" id="escala" min="70" max="120" value="100">
+  </div>
+  <div class="grp"><div class="btns"><button class="btn" id="renderAll" type="button">Renderizar portadas</button><button class="btn secondary" id="downloadZip" type="button">Descargar ZIP</button><button class="btn ghost" id="downloadManifest" type="button">Descargar manifiesto JSON</button></div><p class="hint">Cada portada se genera en PNG de 1080 × 1350 px.</p></div>
+  <div class="grp"><span class="lbl">Automatización</span><p class="hint">También acepta <code>?data=</code> con JSON codificado mediante <code>encodeURIComponent</code>. Añade <code>&autodownload=1</code> para intentar descargar el ZIP al terminar.</p></div>
+</aside>
+<main class="board">
+  <div class="boardhead"><div><div class="mark" style="display:block"><b style="font-family:var(--util);font-size:14px;letter-spacing:.18em">Vista previa</b></div><div class="smallstatus" id="summary">Sin renderizar</div></div><div class="pill" id="countPill">0 portadas</div></div>
+  <div id="cards" class="cards"></div><div id="emptyState" class="empty">Pega tu JSON y haz clic en <strong>Renderizar portadas</strong>.</div>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+'use strict';
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+var W=1080,H=1350,INK='#0E1013',PAPER='#F2F1EC',ACCENT='#E4322B';
+var state={escala:100,fx:50,fy:45,zoom:100,items:[],rendered:[]};
+var toastEl=$('#toast'),toastT;
+function toast(m){toastEl.textContent=m;toastEl.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('on')},4200)}
+function status(t){$('#status').textContent=t}
+function setSummary(t){$('#summary').textContent=t}
+function updateCount(){var n=state.rendered.length;$('#countPill').textContent=n+' portada'+(n===1?'':'s')}
+function fDisplay(s){return '400 '+s+'px Anton,"Arial Narrow",Impact,sans-serif'}
+function fUtil(s,w){return (w||600)+' '+s+'px "Barlow Condensed","Arial Narrow",sans-serif'}
+function fTit(s){return '700 '+s+'px "Fira Sans Condensed","Archivo Narrow","Arial Narrow",sans-serif'}
+function slug(s){return (s||'rotativo').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,48)||'rotativo'}
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]})}
+function trackW(ctx,t,tr){var w=0;for(var i=0;i<t.length;i++)w+=ctx.measureText(t[i]).width;return w+tr*Math.max(0,t.length-1)}
+function tracked(ctx,t,x,y,tr,align){var total=trackW(ctx,t,tr);var cx=align==='right'?x-total:align==='center'?x-total/2:x;var prev=ctx.textAlign;ctx.textAlign='left';for(var i=0;i<t.length;i++){ctx.fillText(t[i],cx,y);cx+=ctx.measureText(t[i]).width+tr}ctx.textAlign=prev;return total}
+function trozos(text){var raw=String(text).split(/\s+/).filter(Boolean),out=[];for(var i=0;i<raw.length;i++){var partes=raw[i].split(/(?<=[\u2013\u2014\-\/])/);for(var j=0;j<partes.length;j++)if(partes[j])out.push({t:partes[j],pega:j>0})}return out}
+function wrap(ctx,text,maxW,info){var toks=trozos(text),lines=[],cur='';for(var i=0;i<toks.length;i++){var tk=toks[i];if(ctx.measureText(tk.t).width>maxW){if(info)info.roto=true;if(cur){lines.push(cur);cur=''}var pedazo='';for(var c=0;c<tk.t.length;c++){if(ctx.measureText(pedazo+tk.t[c]).width>maxW&&pedazo){lines.push(pedazo);pedazo=''}pedazo+=tk.t[c]}cur=pedazo;continue}var t=cur?(tk.pega?cur+tk.t:cur+' '+tk.t):tk.t;if(ctx.measureText(t).width<=maxW||!cur){cur=t}else{lines.push(cur);cur=tk.t}}if(cur)lines.push(cur);return lines}
+function fitBlock(ctx,text,maxW,maxH,start,min,ratio,fontFn){function probar(s,tolerar){ctx.font=fontFn(s);var info={roto:false},lines=wrap(ctx,text,maxW,info),widest=0;for(var i=0;i<lines.length;i++)widest=Math.max(widest,ctx.measureText(lines[i]).width);if(info.roto&&!tolerar)return null;if(lines.length*(s*ratio)<=maxH&&widest<=maxW+.5)return{size:s,lines:lines,lh:s*ratio};return null}var lo=min,hi=Math.max(min,Math.round(start)),best=null;while(lo<=hi){var mid=(lo+hi)>>1,r=probar(mid);if(r){best=r;lo=mid+1}else{hi=mid-1}}if(best)return best;best=probar(min,true);if(best)return best;ctx.font=fontFn(min);return{size:min,lines:wrap(ctx,text,maxW,null),lh:min*ratio}}
+function caja(t){return String(t).toUpperCase()}
+function cover(ctx,item,x,y,w,h){ctx.save();ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();var im=item.img;if(im&&im.naturalWidth){var z=item.zoom!=null?item.zoom:state.zoom;var fx=item.fx!=null?item.fx:state.fx;var fy=item.fy!=null?item.fy:state.fy;var s=Math.max(w/im.naturalWidth,h/im.naturalHeight)*(z/100);var dw=im.naturalWidth*s,dh=im.naturalHeight*s;ctx.drawImage(im,x+(w-dw)*(fx/100),y+(h-dh)*(fy/100),dw,dh)}else{ctx.fillStyle='#14171C';ctx.fillRect(x,y,w,h);ctx.strokeStyle='#1B2028';ctx.lineWidth=34;for(var i=-h;i<w+h;i+=68){ctx.beginPath();ctx.moveTo(x+i,y);ctx.lineTo(x+i+h,y+h);ctx.stroke()}ctx.fillStyle='rgba(255,255,255,.22)';ctx.font=fUtil(42,600);ctx.textBaseline='middle';tracked(ctx,'FOTO',x+w/2,y+h/2,16,'center')}ctx.restore()}
+function lockup(ctx,mainColor,accentColor,subColor,barColor){var edge=56;ctx.textBaseline='top';ctx.font=fDisplay(38);var w1=trackW(ctx,'ROTATIVO ',0.5);ctx.fillStyle=mainColor;tracked(ctx,'ROTATIVO ',edge,54,0.5,'left');ctx.fillStyle=accentColor;tracked(ctx,'EDOMEX',edge+w1,54,0.5,'left');ctx.font=fUtil(16,600);ctx.fillStyle=subColor;tracked(ctx,'NOTICIAS QUE CONECTAN',edge,101,4.6,'left');ctx.fillStyle=barColor;ctx.fillRect(edge,128,96,5);return 133}
+function drawCard(ctx,item){var A=ACCENT,mx=72,maxW=W-mx*2;ctx.clearRect(0,0,W,H);ctx.fillStyle=A;ctx.fillRect(0,0,W,H);ctx.fillStyle='rgba(255,255,255,.14)';for(var x=0;x<W;x+=54)ctx.fillRect(x,0,1,H);lockup(ctx,'#FFFFFF',INK,'rgba(255,255,255,.92)',INK);cover(ctx,item,mx,238,maxW,640);var pad=40,innerW=maxW-pad*2;var texto=caja(item.titulo||'Escribe aquí el título de la nota');var escala=item.escala!=null?item.escala:state.escala;var fit=fitBlock(ctx,texto,innerW,300*escala/100,120,26,1.1,fTit);var hlH=fit.lines.length*fit.lh;var blockH=pad+24+20+hlH+28+5+pad-6;var blockTop=820;if(blockTop+blockH>H-72)blockTop=H-72-blockH;ctx.fillStyle=PAPER;ctx.fillRect(mx,blockTop,maxW,blockH);var cx=mx+pad,cy=blockTop+pad;ctx.font=fUtil(20,700);ctx.fillStyle=A;ctx.textBaseline='top';tracked(ctx,(item.seccion||'NOTA').toUpperCase(),cx,cy,6.4,'left');cy+=24+20;ctx.font=fTit(fit.size);ctx.fillStyle=INK;ctx.textAlign='left';ctx.textBaseline='top';for(var i=0;i<fit.lines.length;i++)ctx.fillText(fit.lines[i],cx,cy+i*fit.lh);cy+=hlH+28;ctx.fillStyle=A;ctx.fillRect(cx,cy,110,5)}
+function safeParse(raw){var data=JSON.parse(raw);if(!Array.isArray(data))throw new Error('El JSON debe ser un arreglo.');return data}
+function normalizeItems(arr){return arr.map(function(item,idx){if(!item||!String(item.titulo||'').trim())throw new Error('El elemento '+(idx+1)+' no tiene título.');var titulo=String(item.titulo).trim();var seccion=String(item.seccion||'Municipal').trim().slice(0,22)||'Municipal';return{index:idx+1,titulo:titulo,seccion:seccion,imagen:String(item.imagen||'').trim(),slug:item.slug?String(item.slug):('noticia-'+String(idx+1).padStart(2,'0')+'-'+slug(titulo)),fx:item.fx!=null?+item.fx:null,fy:item.fy!=null?+item.fy:null,zoom:item.zoom!=null?+item.zoom:null,escala:item.escala!=null?+item.escala:null,img:null,tainted:false,ok:false,error:''}})}
+function loadImage(src){return new Promise(function(resolve,reject){if(!src){reject(new Error('Sin imagen'));return}var url=String(src).trim();if(/^\/\//.test(url))url='https:'+url;function direct(u,cross){return new Promise(function(ok,no){var im=new Image();if(cross)im.crossOrigin='anonymous';im.onload=function(){ok({im:im,tainted:!cross&&!/^data:/i.test(u)})};im.onerror=function(){no(new Error('No carga'))};im.src=u})}if(/^data:/i.test(url)){direct(url,false).then(resolve).catch(reject);return}fetch(url,{mode:'cors'}).then(function(res){if(!res.ok)throw new Error('HTTP');return res.blob()}).then(function(blob){if(!/^image\//.test(blob.type))throw new Error('Tipo');return new Promise(function(ok,no){var fr=new FileReader();fr.onload=function(){ok(fr.result)};fr.onerror=no;fr.readAsDataURL(blob)})}).then(function(dataUrl){return direct(dataUrl,false)}).then(resolve).catch(function(){direct(url,true).then(function(r){r.tainted=false;resolve(r)}).catch(function(){direct(url,false).then(function(r){r.tainted=true;resolve(r)}).catch(reject)})})})}
+function makeCard(item){var card=document.createElement('article');card.className='card';card.innerHTML='<div class="cardhead"><div><h3>Noticia '+String(item.index).padStart(2,'0')+'</h3><p>'+escapeHtml(item.seccion)+' · '+escapeHtml(item.slug)+'.png</p></div><span class="pill '+(item.ok?'ok':'bad')+'">'+(item.ok?'Lista':'Con aviso')+'</span></div><div class="stage"><canvas width="1080" height="1350"></canvas></div><div class="mini"></div><div class="cardactions"><button class="btn secondary" type="button">Descargar PNG</button><button class="btn ghost" type="button">Copiar JSON</button></div>';var canvas=$('canvas',card),ctx=canvas.getContext('2d');drawCard(ctx,item);$('.mini',card).innerHTML='<strong>Título:</strong> '+escapeHtml(item.titulo)+(item.error?'<br><strong>Aviso:</strong> '+escapeHtml(item.error):'');$('.pill',card).className='pill '+(item.ok?'ok':'bad');$('.pill',card).textContent=item.ok?(item.tainted?'Lista*':'Lista'):'Con aviso';var buttons=$$('.cardactions button',card);buttons[0].addEventListener('click',function(){try{var a=document.createElement('a');a.download=item.slug+'.png';a.href=canvas.toDataURL('image/png');document.body.appendChild(a);a.click();document.body.removeChild(a)}catch(err){toast(item.tainted?'La imagen quedó bloqueada por CORS y no puede exportarse.':'No se pudo descargar ese PNG.')}});buttons[1].addEventListener('click',function(){var json=JSON.stringify({titulo:item.titulo,seccion:item.seccion,imagen:item.imagen,slug:item.slug},null,2);if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(json).then(function(){toast('JSON copiado.')}).catch(function(){toast('No se pudo copiar.')})}else{toast('La copia automática no está disponible en este navegador.')}});return card}
+async function renderAll(){var raw=$('#jsonInput').value.trim();if(!raw){toast('Pega primero el JSON.');return}try{state.items=normalizeItems(safeParse(raw))}catch(err){toast(err.message||'JSON inválido.');status('Error');return}status('Cargando imágenes…');setSummary('Preparando '+state.items.length+' noticia'+(state.items.length===1?'':'s')+'…');$('#cards').innerHTML='';$('#emptyState').hidden=true;state.rendered=[];updateCount();for(var i=0;i<state.items.length;i++){var item=state.items[i];try{if(item.imagen){var r=await loadImage(item.imagen);item.img=r.im;item.tainted=!!r.tainted;item.ok=true;if(item.tainted)item.error='La imagen pudo renderizarse, pero la exportación puede bloquearse por CORS.'}else{item.ok=false;item.error='Sin imagen. Se renderizó con placeholder.'}}catch(err){item.ok=false;item.error='No se pudo cargar la imagen.'}state.rendered.push(item);$('#cards').appendChild(makeCard(item));updateCount()}var okCount=state.rendered.filter(function(x){return x.ok}).length;status('Renderizado');setSummary(okCount+' de '+state.rendered.length+' portadas con imagen cargada.');if(state.rendered.some(function(x){return x.tainted}))toast('Hay imágenes externas que podrían bloquear la exportación.');if(!state.rendered.length)$('#emptyState').hidden=false}
+async function downloadZip(){if(!state.rendered.length){toast('Primero renderiza las portadas.');return}if(typeof JSZip==='undefined'){toast('No se cargó JSZip. Revisa tu conexión.');return}status('Empaquetando ZIP…');var zip=new JSZip(),manifest=[],count=0;for(var i=0;i<state.rendered.length;i++){var item=state.rendered[i],card=$$('#cards .card')[i],canvas=$('canvas',card);try{var dataUrl=canvas.toDataURL('image/png');zip.file(item.slug+'.png',dataUrl.split(',')[1],{base64:true});manifest.push({titulo:item.titulo,seccion:item.seccion,imagen:item.imagen,slug:item.slug+'.png',ok:item.ok,aviso:item.error||''});count++}catch(err){manifest.push({titulo:item.titulo,seccion:item.seccion,imagen:item.imagen,slug:item.slug+'.png',ok:false,aviso:item.tainted?'No se pudo exportar por CORS.':'No se pudo exportar el canvas.'})}}zip.file('manifiesto.json',JSON.stringify(manifest,null,2));var blob=await zip.generateAsync({type:'blob'});var a=document.createElement('a');a.download='rotativo-portadas-'+new Date().toISOString().slice(0,10)+'.zip';a.href=URL.createObjectURL(blob);document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(a.href)},1000);status('ZIP descargado');toast('ZIP generado con '+count+' PNG exportables.')}
+function downloadManifest(){var payload=state.rendered.map(function(item){return{titulo:item.titulo,seccion:item.seccion,imagen:item.imagen,slug:item.slug,ok:item.ok,aviso:item.error||''}});var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});var a=document.createElement('a');a.download='manifiesto-rotativo.json';a.href=URL.createObjectURL(blob);document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(a.href)},1000)}
+function setExample(){$('#jsonInput').value=JSON.stringify([{titulo:'Reabren la circulación en la México–Querétaro tras cuatro horas de cierre',seccion:'Movilidad',imagen:'https://picsum.photos/1000/1200?random=21',slug:'01-mexico-queretaro'},{titulo:'Detienen a presuntos responsables de robo en Ecatepec',seccion:'Seguridad',imagen:'https://picsum.photos/1000/1200?random=22',slug:'02-detencion-ecatepec'},{titulo:'Vecinos reportan afectaciones por falta de agua en Tlalnepantla',seccion:'Municipal',imagen:'https://picsum.photos/1000/1200?random=23',slug:'03-agua-tlalnepantla'},{titulo:'Toluca ajusta operativo vial por obras en zona centro',seccion:'Movilidad',imagen:'https://picsum.photos/1000/1200?random=24',slug:'04-operativo-toluca'}],null,2)}
+function bindRange(id,key){$('#'+id).addEventListener('input',function(e){state[key]=+e.target.value})}
+bindRange('fx','fx');bindRange('fy','fy');bindRange('zoom','zoom');bindRange('escala','escala');$('#renderAll').addEventListener('click',renderAll);$('#downloadZip').addEventListener('click',downloadZip);$('#downloadManifest').addEventListener('click',downloadManifest);$('#fillExample').addEventListener('click',function(){setExample();toast('Ejemplo cargado.')});$('#clearJson').addEventListener('click',function(){$('#jsonInput').value='';toast('JSON limpiado.')});
+function maybeBootFromQuery(){var params=new URLSearchParams(location.search),raw=params.get('data');if(!raw)return;try{$('#jsonInput').value=decodeURIComponent(raw)}catch(e){$('#jsonInput').value=raw}renderAll().then(function(){if(params.get('autodownload')==='1')setTimeout(function(){downloadZip()},500)})}
+window.RotativoBatch={renderFromArray:function(arr){$('#jsonInput').value=JSON.stringify(arr,null,2);return renderAll()},renderFromJSON:function(json){$('#jsonInput').value=json;return renderAll()},downloadAll:downloadZip,getRendered:function(){return state.rendered.slice()}};
+setExample();maybeBootFromQuery();status('Listo');
+})();
+</script>
+</body>
+</html>
