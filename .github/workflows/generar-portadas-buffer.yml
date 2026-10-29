@@ -1,0 +1,39 @@
+name: Generar portadas WebP y PNG para Buffer
+on:
+  push:
+    paths:
+      - 'requests/*.json'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: portadas-buffer
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar Playwright y Chromium
+        run: |
+          npm install --no-save playwright sharp
+          npx playwright install --with-deps chromium
+      - name: Generar WebP optimizado y PNG de respaldo desde r_news
+        run: node scripts/render-portadas.cjs
+      - name: Guardar WebP, PNG y manifiesto en GitHub
+        run: |
+          git add -A portadas/
+          if git diff --cached --quiet; then
+            echo "No hay portadas nuevas"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Generar portadas WebP y PNG automáticamente"
+          git push origin "HEAD:$GITHUB_REF_NAME"
