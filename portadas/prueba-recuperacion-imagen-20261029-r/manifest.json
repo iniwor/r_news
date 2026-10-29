@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "solicitud": "prueba-recuperacion-imagen-20261029-r",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "generado": "2026-10-29T04:18:10.276Z",
+  "portadas": [
+    {
+      "titulo": "PRUEBA TÉCNICA DE RECUPERACIÓN — NO PUBLICAR",
+      "seccion": "Política",
+      "slug": "01-recuperacion-r",
+      "archivo": "portadas/prueba-recuperacion-imagen-20261029-r/01-recuperacion-r.webp",
+      "archivo_png": "portadas/prueba-recuperacion-imagen-20261029-r/01-recuperacion-r.png",
+      "imagen_utilizada": "https://www.digitalmex.mx/images/2026/OCTUBRE/28/auto-puente.jpg",
+      "alternativa_usada": true,
+      "intentos_imagen": 3,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/prueba-recuperacion-imagen-20261029-r/01-recuperacion-r.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/prueba-recuperacion-imagen-20261029-r/01-recuperacion-r.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/prueba-recuperacion-imagen-20261029-r/01-recuperacion-r.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/prueba-recuperacion-imagen-20261029-r/01-recuperacion-r.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 114704,
+      "bytes_png": 653510,
+      "ahorro_pct": 82,
+      "objetivo_700kb": true
+    }
+  ]
+}
