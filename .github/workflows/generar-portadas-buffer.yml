@@ -36,4 +36,21 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Generar portadas WebP y PNG automáticamente"
-          git push origin "HEAD:$GITHUB_REF_NAME"
+          # Otro commit (por ejemplo una solicitud nueva) puede llegar durante el render.
+          # Reintegra los cambios remotos y reintenta sin sobrescribirlos.
+          for intento in 1 2 3 4 5; do
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then
+              echo "Portadas publicadas correctamente (intento $intento)."
+              exit 0
+            fi
+            echo "Conflicto al publicar; sincronizando rama (intento $intento/5)..."
+            git fetch origin "$GITHUB_REF_NAME"
+            if ! git rebase "origin/$GITHUB_REF_NAME"; then
+              git rebase --abort || true
+              echo "::error::No se pudo reintegrar un cambio concurrente; intervención necesaria."
+              exit 1
+            fi
+            sleep $((intento * 2))
+          done
+          echo "::error::No fue posible publicar las portadas tras cinco intentos."
+          exit 1
