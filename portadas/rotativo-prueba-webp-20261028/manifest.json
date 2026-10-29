@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-prueba-webp-20261028",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "generado": "2026-10-29T03:10:20.550Z",
+  "portadas": [
+    {
+      "titulo": "PRUEBA TÉCNICA DE PORTADA — NO PUBLICAR",
+      "seccion": "Movilidad",
+      "slug": "01-prueba-tecnica",
+      "archivo": "portadas/rotativo-prueba-webp-20261028/01-prueba-tecnica.webp",
+      "archivo_png": "portadas/rotativo-prueba-webp-20261028/01-prueba-tecnica.png",
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-prueba-webp-20261028/01-prueba-tecnica.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-prueba-webp-20261028/01-prueba-tecnica.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-prueba-webp-20261028/01-prueba-tecnica.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-prueba-webp-20261028/01-prueba-tecnica.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 115264,
+      "bytes_png": 657917,
+      "ahorro_pct": 82,
+      "objetivo_700kb": true
+    }
+  ]
+}
