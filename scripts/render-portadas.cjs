@@ -23,6 +23,9 @@ function validate(name, data) {
     if (!item || typeof item.titulo !== 'string' || !item.titulo.trim() || item.titulo.length > 160 ||
         typeof item.imagen !== 'string' || !/^https:\/\//.test(item.imagen) ||
         typeof item.seccion !== 'string' || !item.seccion.trim() || item.seccion.length > 22 ||
+        (item.imagenes_alternativas !== undefined &&
+          (!Array.isArray(item.imagenes_alternativas) || item.imagenes_alternativas.length > 3 ||
+           item.imagenes_alternativas.some(url => typeof url !== 'string' || !/^https:\/\//.test(url)))) ||
         typeof item.slug !== 'string' || !SAFE.test(item.slug) || slugs.has(item.slug)) {
       throw new Error('Noticia inválida en ' + name);
     }
@@ -58,6 +61,33 @@ async function render(page, item, filepath) {
     throw new Error('PNG inválido, tamaño '+width+'x'+height);
   }
   return {width,height,bytes:png.length};
+}
+
+// Una URL que el sitio de origen bloquea no debe arruinar toda la portada.
+ // Las alternativas son fotografías verificadas DEL MISMO HECHO, aportadas por el editor.
+async function renderWithFallback(page, item, filepath) {
+  const candidates = [...new Set([item.imagen, ...(item.imagenes_alternativas || [])])];
+  const failures = [];
+  for (let i = 0; i < candidates.length; i++) {
+    const url = candidates[i];
+    // Reintenta una vez la imagen principal ante un fallo transitorio.
+    const attempts = i === 0 ? 2 : 1;
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      try {
+        const dimensions = await render(page, { ...item, imagen: url }, filepath);
+        if (i > 0) console.log('Imagen alternativa verificada utilizada para ' + item.slug + ': ' + url);
+        return { dimensions, imagen_utilizada: url, alternativa_usada: i > 0, intentos_imagen: failures.length + 1 };
+      } catch (err) {
+        const reason = String(err.message || err);
+        failures.push({ candidata: i + 1, intento: attempt, error: reason });
+        console.warn('No se pudo cargar imagen ' + (i + 1) + ' de ' + item.slug + ' (intento ' + attempt + '): ' + reason);
+        await fs.rm(filepath, { force: true });
+        if (i === 0 && attempt < attempts) await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+    }
+  }
+  throw new Error('No se pudo generar portada ' + item.slug +
+    ': agotadas ' + candidates.length + ' URL(s) verificadas. ' + JSON.stringify(failures));
 }
 
 async function compressWebp(pngPath, webpPath) {
@@ -104,12 +134,13 @@ async function main(){
       for(const item of data.items){
         const pngPath='portadas/'+id+'/'+item.slug+'.png';
         const webpPath='portadas/'+id+'/'+item.slug+'.webp';
-        const dimensions=await render(page,item,path.join(ROOT,pngPath));
+        const {dimensions,imagen_utilizada,alternativa_usada,intentos_imagen}=await renderWithFallback(page,item,path.join(ROOT,pngPath));
         const optimized=await compressWebp(path.join(ROOT,pngPath),path.join(ROOT,webpPath));
         const rootUrl='https://raw.githubusercontent.com/iniwor/r_news/'+REF+'/';
         portadas.push({
           titulo:item.titulo,seccion:item.seccion,slug:item.slug,archivo:webpPath,
           archivo_png:pngPath,
+          imagen_utilizada,alternativa_usada,intentos_imagen,
           url_directa:rootUrl+webpPath,
           url_webp:rootUrl+webpPath,
           url_png:rootUrl+pngPath,
