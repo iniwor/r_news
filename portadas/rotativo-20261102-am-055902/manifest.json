@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261102-am-055902",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "generado": "2026-11-02T11:59:47.332Z",
+  "portadas": [
+    {
+      "titulo": "Suspenden cuatro fiestas sin permiso en Ecatepec",
+      "seccion": "Seguridad",
+      "slug": "01-fiestas-sin-permiso-ecatepec",
+      "archivo": "portadas/rotativo-20261102-am-055902/01-fiestas-sin-permiso-ecatepec.webp",
+      "archivo_png": "portadas/rotativo-20261102-am-055902/01-fiestas-sin-permiso-ecatepec.png",
+      "imagen_utilizada": "https://www.eluniversaledomex.com.mx/resizer/v2/ASNSZU27AVBCDBRQTCNQMBQEZI.jpg?auth=da23dcbf0be1cd235b285a4be3bffc3c17d17ac2d03cf3ef938ba22ce4fb6a21&smart=true&height=666",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261102-am-055902/01-fiestas-sin-permiso-ecatepec.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261102-am-055902/01-fiestas-sin-permiso-ecatepec.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261102-am-055902/01-fiestas-sin-permiso-ecatepec.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261102-am-055902/01-fiestas-sin-permiso-ecatepec.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 146616,
+      "bytes_png": 785138,
+      "ahorro_pct": 81,
+      "objetivo_700kb": true
+    }
+  ]
+}
