@@ -114,48 +114,131 @@ async function compressWebp(pngPath, webpPath) {
   };
 }
 
-async function main(){
-  await fs.mkdir(REQUESTS,{recursive:true});
-  await fs.mkdir(OUTPUT,{recursive:true});
-  const files=(await fs.readdir(REQUESTS)).filter(x=>x.endsWith('.json')).sort();
-  if(!files.length){console.log('Sin solicitudes.');return;}
-  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
-  try{
-    const context=await browser.newContext({viewport:{width:1400,height:1600},deviceScaleFactor:1,locale:'es-MX'});
-    const page=await context.newPage();
-    for(const filename of files){
-      const data=JSON.parse(await fs.readFile(path.join(REQUESTS,filename),'utf8'));
-      const id=validate(filename,data);
-      const dir=path.join(OUTPUT,id);
-      const manifestPath=path.join(dir,'manifest.json');
-      try{await fs.access(manifestPath);console.log('Ya generada: '+id);continue;}catch(_){}
-      await fs.mkdir(dir,{recursive:true});
-      const portadas=[];
-      for(const item of data.items){
-        const pngPath='portadas/'+id+'/'+item.slug+'.png';
-        const webpPath='portadas/'+id+'/'+item.slug+'.webp';
-        const {dimensions,imagen_utilizada,alternativa_usada,intentos_imagen}=await renderWithFallback(page,item,path.join(ROOT,pngPath));
-        const optimized=await compressWebp(path.join(ROOT,pngPath),path.join(ROOT,webpPath));
-        const rootUrl='https://raw.githubusercontent.com/iniwor/r_news/'+REF+'/';
-        portadas.push({
-          titulo:item.titulo,seccion:item.seccion,slug:item.slug,archivo:webpPath,
-          archivo_png:pngPath,
-          imagen_utilizada,alternativa_usada,intentos_imagen,
-          url_directa:rootUrl+webpPath,
-          url_webp:rootUrl+webpPath,
-          url_png:rootUrl+pngPath,
-          url_pages:'https://iniwor.github.io/r_news/'+webpPath,
-          width:dimensions.width,height:dimensions.height,
-          ...optimized
-        });
-        console.log('WebP listo: '+webpPath+' ('+optimized.bytes+' bytes; calidad '+optimized.calidad+')');
+// En GitHub Actions solo se procesa la solicitud del push actual.
+// Esto evita que solicitudes antiguas con imágenes caducadas bloqueen nuevas portadas.
+async function getRequestFiles() {
+  const requested = (process.env.REQUEST_FILE || '').trim();
+  if (requested) {
+    const filename = requested.startsWith('requests/') ? requested.slice('requests/'.length) : requested;
+    if (!filename.endsWith('.json') || !SAFE.test(filename.slice(0, -5)) || filename.includes('/')) {
+      throw new Error('REQUEST_FILE inválido: ' + requested);
+    }
+    return [filename];
+  }
+  // GitHub Actions entrega explícitamente los archivos del commit.
+  const selected = (process.env.REQUEST_FILES || '').split(/[\r\n,]+/).map(x => x.trim()).filter(Boolean);
+  if (selected.length) {
+    const files = [...new Set(selected.map(x => x.startsWith('requests/') ? x.slice('requests/'.length) : x))];
+    if (files.some(x => !x.endsWith('.json') || !SAFE.test(x.slice(0,-5)) || x.includes('/'))) {
+      throw new Error('REQUEST_FILES contiene rutas inválidas.');
+    }
+    return files.sort();
+  }
+  if (process.env.GITHUB_EVENT_PATH) {
+    const event = JSON.parse(await fs.readFile(process.env.GITHUB_EVENT_PATH, 'utf8'));
+    const commits = [...(event.commits || []), ...(event.head_commit ? [event.head_commit] : [])];
+    const touched = commits.flatMap(c => [...(c.added || []), ...(c.modified || [])]);
+    return [...new Set(touched)]
+      .filter(p => /^requests\/[a-z0-9][a-z0-9_-]{0,79}\.json$/.test(p))
+      .map(p => p.slice('requests/'.length))
+      .sort();
+  }
+  throw new Error('Especifica REQUEST_FILE para ejecutar el generador fuera de GitHub Actions.');
+}
+
+async function main() {
+  await fs.mkdir(REQUESTS, {recursive: true});
+  await fs.mkdir(OUTPUT, {recursive: true});
+  const files = await getRequestFiles();
+  if (!files.length) { console.log('El cambio no contiene solicitudes nuevas de portadas.'); return; }
+
+  const browser = await chromium.launch({headless:true,args:['--no-sandbox']});
+  try {
+    const context = await browser.newContext({viewport:{width:1400,height:1600},deviceScaleFactor:1,locale:'es-MX'});
+    const page = await context.newPage();
+    for (const filename of files) {
+      const id = path.basename(filename, '.json');
+      const dir = path.join(OUTPUT, id);
+      const manifestPath = path.join(dir, 'manifest.json');
+      await fs.mkdir(dir, {recursive:true});
+      let data;
+      try {
+        data = JSON.parse(await fs.readFile(path.join(REQUESTS, filename), 'utf8'));
+        validate(filename, data);
+      } catch (err) {
+        const diagnostic = {
+          ok:false, solicitud:id, plantilla:GENERATOR, ref:REF, total:0,
+          solicitadas:0, parcial:false, generado:new Date().toISOString(),
+          portadas:[], errores:[{slug:null, error:'Solicitud inválida: ' + String(err.message || err)}]
+        };
+        await fs.writeFile(manifestPath, JSON.stringify(diagnostic,null,2)+'\n');
+        console.error('Solicitud inválida ' + filename + ': ' + String(err.message || err));
+        continue;
       }
-      await fs.writeFile(manifestPath,JSON.stringify({
-        ok:true,solicitud:id,plantilla:GENERATOR,ref:REF,total:portadas.length,
-        generado:new Date().toISOString(),portadas
-      },null,2)+'\n');
+
+      // Los manifiestos completos se conservan. Los incompletos pueden recuperarse
+      // si el editor modifica la misma solicitud con nuevas URLs alternativas.
+      try {
+        const existing = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
+        const expected = new Set(data.items.map(item => item.slug));
+        if (existing.ok === true && existing.total === data.items.length &&
+            Array.isArray(existing.portadas) &&
+            existing.portadas.every(item => expected.has(item.slug)) &&
+            (await Promise.all(existing.portadas.map(item =>
+              fs.access(path.join(ROOT, item.archivo)).then(() => true).catch(() => false)
+            ))).every(Boolean)) {
+          console.log('Solicitud ya completada: ' + id);
+          continue;
+        }
+      } catch (_) {}
+
+      const portadas = [];
+      const errores = [];
+      const rootUrl = 'https://raw.githubusercontent.com/iniwor/r_news/' + REF + '/';
+      for (const item of data.items) {
+        const pngPath = 'portadas/' + id + '/' + item.slug + '.png';
+        const webpPath = 'portadas/' + id + '/' + item.slug + '.webp';
+        try {
+          const {dimensions,imagen_utilizada,alternativa_usada,intentos_imagen} =
+            await renderWithFallback(page, item, path.join(ROOT,pngPath));
+          const optimized = await compressWebp(path.join(ROOT,pngPath), path.join(ROOT,webpPath));
+          portadas.push({
+            titulo:item.titulo,seccion:item.seccion,slug:item.slug,archivo:webpPath,
+            archivo_png:pngPath,
+            imagen_utilizada,alternativa_usada,intentos_imagen,
+            url_directa:rootUrl+webpPath,
+            url_webp:rootUrl+webpPath,
+            url_png:rootUrl+pngPath,
+            url_pages:'https://iniwor.github.io/m_news/'+webpPath,
+            width:dimensions.width,height:dimensions.height,
+            ...optimized
+          });
+          console.log('WebP listo: ' + webpPath + ' (' + optimized.bytes + ' bytes; calidad ' + optimized.calidad + ')');
+        } catch (err) {
+          const reason = String(err.message || err);
+          errores.push({slug:item.slug, titulo:item.titulo, error:reason.slice(0,2500)});
+          await Promise.all([
+            fs.rm(path.join(ROOT,pngPath), {force:true}),
+            fs.rm(path.join(ROOT,webpPath), {force:true})
+          ]);
+          console.warn('Portada omitida sin detener las demás: ' + item.slug + ' - ' + reason);
+        }
+      }
+
+      // ok confirma que las portadas listadas son válidas, no que todas las imágenes
+      // solicitadas funcionaron. total/solicitadas/parcial/errores permiten
+      // al consumidor decidir si admite publicaciones parciales.
+      const manifest = {
+        ok:portadas.length > 0, solicitud:id, plantilla:GENERATOR, ref:REF,
+        total:portadas.length, solicitadas:data.items.length,
+        parcial:errores.length > 0, generado:new Date().toISOString(),
+        portadas, errores
+      };
+      await fs.writeFile(manifestPath, JSON.stringify(manifest,null,2)+'\n');
+      console.log('Resultado ' + id + ': ' + portadas.length + '/' + data.items.length +
+                  ' portada(s), ' + errores.length + ' incidencia(s).');
     }
     await context.close();
-  }finally{await browser.close();}
+  } finally { await browser.close(); }
 }
 main().catch(e=>{console.error(e.stack||String(e));process.exitCode=1;});
