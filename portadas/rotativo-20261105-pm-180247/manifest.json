@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261105-pm-180247",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "generado": "2026-11-06T00:03:20.605Z",
+  "portadas": [
+    {
+      "titulo": "Recolectores bloquean la Chamapa-Lechería y denuncian presuntas extorsiones",
+      "seccion": "Movilidad",
+      "slug": "01-bloqueo-recolectores-chamapa-lecheria",
+      "archivo": "portadas/rotativo-20261105-pm-180247/01-bloqueo-recolectores-chamapa-lecheria.webp",
+      "archivo_png": "portadas/rotativo-20261105-pm-180247/01-bloqueo-recolectores-chamapa-lecheria.png",
+      "imagen_utilizada": "https://static.nmas.com.mx/Nmas/cms/1793893693044-snapshot-1376x774.jpg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261105-pm-180247/01-bloqueo-recolectores-chamapa-lecheria.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261105-pm-180247/01-bloqueo-recolectores-chamapa-lecheria.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261105-pm-180247/01-bloqueo-recolectores-chamapa-lecheria.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261105-pm-180247/01-bloqueo-recolectores-chamapa-lecheria.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 138956,
+      "bytes_png": 823466,
+      "ahorro_pct": 83,
+      "objetivo_700kb": true
+    }
+  ]
+}
