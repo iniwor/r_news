@@ -209,7 +209,7 @@ async function main() {
             url_directa:rootUrl+webpPath,
             url_webp:rootUrl+webpPath,
             url_png:rootUrl+pngPath,
-            url_pages:'https://iniwor.github.io/m_news/'+webpPath,
+            url_pages:'https://iniwor.github.io/r_news/'+webpPath,
             width:dimensions.width,height:dimensions.height,
             ...optimized
           });
