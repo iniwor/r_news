@@ -4,6 +4,11 @@ on:
     paths:
       - 'requests/*.json'
   workflow_dispatch:
+    inputs:
+      request_file:
+        description: 'Ruta de la solicitud JSON que quieres generar'
+        required: true
+        type: string
 permissions:
   contents: write
 concurrency:
@@ -16,6 +21,32 @@ jobs:
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Identificar solicitudes del commit
+        env:
+          MANUAL_REQUEST: ${{ inputs.request_file }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ -z "$MANUAL_REQUEST" ]; then
+              echo "::error::Elige el archivo JSON para ejecutar manualmente."
+              exit 1
+            fi
+            echo "REQUEST_FILE=$MANUAL_REQUEST" >> "$GITHUB_ENV"
+            echo "Solicitud manual: $MANUAL_REQUEST"
+          else
+            mapfile -t changed < <(git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" -- requests/)
+            if [ "${#changed[@]}" -eq 0 ]; then
+              echo "::error::No se identificaron solicitudes JSON en el commit."
+              exit 1
+            fi
+            {
+              echo "REQUEST_FILES<<ROTATIVO_FILES_END"
+              printf '%s\n' "${changed[@]}"
+              echo "ROTATIVO_FILES_END"
+            } >> "$GITHUB_ENV"
+            printf 'Solicitudes detectadas: %s\n' "${changed[*]}"
+          fi
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
