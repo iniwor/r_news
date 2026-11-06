@@ -1,0 +1,41 @@
+{
+  "ok": true,
+  "solicitud": "validacion-rnews-20261106-parcial",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "solicitadas": 2,
+  "parcial": true,
+  "generado": "2026-11-06T12:52:58.252Z",
+  "portadas": [
+    {
+      "titulo": "PRUEBA TÉCNICA: generación válida de portada Rotativo",
+      "seccion": "Política",
+      "slug": "01-render-verificado",
+      "archivo": "portadas/validacion-rnews-20261106-parcial/01-render-verificado.webp",
+      "archivo_png": "portadas/validacion-rnews-20261106-parcial/01-render-verificado.png",
+      "imagen_utilizada": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261105-pm-180247/01-bloqueo-recolectores-chamapa-lecheria.png",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/validacion-rnews-20261106-parcial/01-render-verificado.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/validacion-rnews-20261106-parcial/01-render-verificado.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/validacion-rnews-20261106-parcial/01-render-verificado.png",
+      "url_pages": "https://iniwor.github.io/m_news/portadas/validacion-rnews-20261106-parcial/01-render-verificado.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 111038,
+      "bytes_png": 625565,
+      "ahorro_pct": 82,
+      "objetivo_700kb": true
+    }
+  ],
+  "errores": [
+    {
+      "slug": "02-fallo-aislado",
+      "titulo": "PRUEBA TÉCNICA: falla aislada de fotografía",
+      "error": "No se pudo generar portada 02-fallo-aislado: agotadas 1 URL(s) verificadas. [{\"candidata\":1,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":1,\"intento\":2,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"}]"
+    }
+  ]
+}
