@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "titulo": "PRUEBA TÉCNICA: generación válida de portada Rotativo",
+      "seccion": "Política",
+      "imagen": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261105-pm-180247/01-bloqueo-recolectores-chamapa-lecheria.png",
+      "slug": "01-render-verificado"
+    },
+    {
+      "titulo": "PRUEBA TÉCNICA: falla aislada de fotografía",
+      "seccion": "Municipal",
+      "imagen": "https://iniwor.github.io/r_news/imagen-inexistente-prueba-20261106.jpg",
+      "slug": "02-fallo-aislado"
+    }
+  ]
+}
