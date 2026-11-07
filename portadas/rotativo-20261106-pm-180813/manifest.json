@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261106-pm-180813",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "solicitadas": 1,
+  "parcial": false,
+  "generado": "2026-11-07T00:15:59.882Z",
+  "portadas": [
+    {
+      "titulo": "Paro judicial bloquea Periférico Norte en Naucalpan",
+      "seccion": "Movilidad",
+      "slug": "01-paro-judicial-periferico-naucalpan",
+      "archivo": "portadas/rotativo-20261106-pm-180813/01-paro-judicial-periferico-naucalpan.webp",
+      "archivo_png": "portadas/rotativo-20261106-pm-180813/01-paro-judicial-periferico-naucalpan.png",
+      "imagen_utilizada": "https://edomex.quadratin.com.mx/www/wp-content/uploads/2026/11/Continuan-protestas-del-PJF-y-afectan-Periferico-Norte2-1160x700.jpeg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261106-pm-180813/01-paro-judicial-periferico-naucalpan.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261106-pm-180813/01-paro-judicial-periferico-naucalpan.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261106-pm-180813/01-paro-judicial-periferico-naucalpan.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261106-pm-180813/01-paro-judicial-periferico-naucalpan.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 88950,
+      "bytes_png": 605538,
+      "ahorro_pct": 85,
+      "objetivo_700kb": true
+    }
+  ],
+  "errores": []
+}
