@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261109-am-060057",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "solicitadas": 1,
+  "parcial": false,
+  "generado": "2026-11-09T12:01:36.340Z",
+  "portadas": [
+    {
+      "titulo": "Incendio en llantera moviliza a bomberos en Cuautitlán Izcalli",
+      "seccion": "Seguridad",
+      "slug": "01-incendio-llantera-bomberos-izcalli",
+      "archivo": "portadas/rotativo-20261109-am-060057/01-incendio-llantera-bomberos-izcalli.webp",
+      "archivo_png": "portadas/rotativo-20261109-am-060057/01-incendio-llantera-bomberos-izcalli.png",
+      "imagen_utilizada": "https://edomex.quadratin.com.mx/www/wp-content/uploads/2026/11/WhatsApp-Image-2026-11-08-at-10.41.50-PM-1160x700.jpeg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261109-am-060057/01-incendio-llantera-bomberos-izcalli.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261109-am-060057/01-incendio-llantera-bomberos-izcalli.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261109-am-060057/01-incendio-llantera-bomberos-izcalli.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261109-am-060057/01-incendio-llantera-bomberos-izcalli.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 95100,
+      "bytes_png": 677714,
+      "ahorro_pct": 86,
+      "objetivo_700kb": true
+    }
+  ],
+  "errores": []
+}
