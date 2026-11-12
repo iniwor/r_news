@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261111-pm-180051",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 2,
+  "solicitadas": 3,
+  "parcial": true,
+  "generado": "2026-11-12T00:01:42.191Z",
+  "portadas": [
+    {
+      "titulo": "FGJEM cesa a agente de Neza por presuntos cobros",
+      "seccion": "Justicia",
+      "slug": "01-fgjem-cesa-agente-neza",
+      "archivo": "portadas/rotativo-20261111-pm-180051/01-fgjem-cesa-agente-neza.webp",
+      "archivo_png": "portadas/rotativo-20261111-pm-180051/01-fgjem-cesa-agente-neza.png",
+      "imagen_utilizada": "https://imagenes.excelsior.com.mx/files/og_thumbnail/uploads/2026/11/11/6af4f4b0b468c.jpeg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180051/01-fgjem-cesa-agente-neza.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180051/01-fgjem-cesa-agente-neza.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180051/01-fgjem-cesa-agente-neza.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261111-pm-180051/01-fgjem-cesa-agente-neza.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 119056,
+      "bytes_png": 723290,
+      "ahorro_pct": 84,
+      "objetivo_700kb": true
+    },
+    {
+      "titulo": "Colectivo bloquea Tollocan y exige revisar procesos penales",
+      "seccion": "Justicia",
+      "slug": "02-colectivo-bloquea-tollocan",
+      "archivo": "portadas/rotativo-20261111-pm-180051/02-colectivo-bloquea-tollocan.webp",
+      "archivo_png": "portadas/rotativo-20261111-pm-180051/02-colectivo-bloquea-tollocan.png",
+      "imagen_utilizada": "https://lajornadaestadodemexico.com/resizer/TFH3N0zQ15dyBu2kiFXmbyZD_ps=/1200x675/filters:format(webp)/https://wp.lajornada.prod.andes.news/wp-content/uploads/2026/11/colectivo-acusa-fgjem-de-fabricar-culpables-bloqueo-tollocan.jpg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180051/02-colectivo-bloquea-tollocan.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180051/02-colectivo-bloquea-tollocan.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180051/02-colectivo-bloquea-tollocan.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261111-pm-180051/02-colectivo-bloquea-tollocan.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 107242,
+      "bytes_png": 672053,
+      "ahorro_pct": 84,
+      "objetivo_700kb": true
+    }
+  ],
+  "errores": [
+    {
+      "slug": "03-pipa-vuelca-mexico-pachuca-ecatepec",
+      "titulo": "Pipa vuelca y cierra la México-Pachuca en Ecatepec",
+      "error": "No se pudo generar portada 03-pipa-vuelca-mexico-pachuca-ecatepec: agotadas 1 URL(s) verificadas. [{\"candidata\":1,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":1,\"intento\":2,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"}]"
+    }
+  ]
+}
