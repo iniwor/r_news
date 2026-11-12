@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261111-pm-180246-recuperacion",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "solicitadas": 1,
+  "parcial": false,
+  "generado": "2026-11-12T00:03:18.342Z",
+  "portadas": [
+    {
+      "titulo": "Pipa vuelca y cierra la México-Pachuca en Ecatepec",
+      "seccion": "Movilidad",
+      "slug": "03-pipa-vuelca-mexico-pachuca-ecatepec",
+      "archivo": "portadas/rotativo-20261111-pm-180246-recuperacion/03-pipa-vuelca-mexico-pachuca-ecatepec.webp",
+      "archivo_png": "portadas/rotativo-20261111-pm-180246-recuperacion/03-pipa-vuelca-mexico-pachuca-ecatepec.png",
+      "imagen_utilizada": "https://cdn.amxinfra.com/unotv/images/2026/11/pipa-144539-1024x576.jpg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180246-recuperacion/03-pipa-vuelca-mexico-pachuca-ecatepec.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180246-recuperacion/03-pipa-vuelca-mexico-pachuca-ecatepec.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261111-pm-180246-recuperacion/03-pipa-vuelca-mexico-pachuca-ecatepec.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261111-pm-180246-recuperacion/03-pipa-vuelca-mexico-pachuca-ecatepec.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 64556,
+      "bytes_png": 386493,
+      "ahorro_pct": 83,
+      "objetivo_700kb": true
+    }
+  ],
+  "errores": []
+}
