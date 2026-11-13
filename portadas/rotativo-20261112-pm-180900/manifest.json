@@ -1,0 +1,18 @@
+{
+  "ok": false,
+  "solicitud": "rotativo-20261112-pm-180900",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 0,
+  "solicitadas": 1,
+  "parcial": true,
+  "generado": "2026-11-13T00:09:59.209Z",
+  "portadas": [],
+  "errores": [
+    {
+      "slug": "01-tultitlan-retira-escombro",
+      "titulo": "Tultitlán retira escombro tras reclamos por obra vial",
+      "error": "No se pudo generar portada 01-tultitlan-retira-escombro: agotadas 3 URL(s) verificadas. [{\"candidata\":1,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":1,\"intento\":2,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":2,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":3,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"}]"
+    }
+  ]
+}
