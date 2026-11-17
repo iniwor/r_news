@@ -1,0 +1,18 @@
+{
+  "ok": false,
+  "solicitud": "rotativo-20261116-pm-180700-recuperacion",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 0,
+  "solicitadas": 1,
+  "parcial": true,
+  "generado": "2026-11-17T00:08:18.154Z",
+  "portadas": [],
+  "errores": [
+    {
+      "slug": "02-cierres-colector-las-jaras",
+      "titulo": "Toluca cerrará dos vialidades por obras del colector Las Jaras",
+      "error": "No se pudo generar portada 02-cierres-colector-las-jaras: agotadas 1 URL(s) verificadas. [{\"candidata\":1,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":1,\"intento\":2,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"}]"
+    }
+  ]
+}
