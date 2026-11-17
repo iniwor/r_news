@@ -1,0 +1,41 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261116-pm-180446",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 1,
+  "solicitadas": 2,
+  "parcial": true,
+  "generado": "2026-11-17T00:05:47.190Z",
+  "portadas": [
+    {
+      "titulo": "Corte de agua afecta 115 colonias de Tlalnepantla",
+      "seccion": "Sociedad",
+      "slug": "01-corte-agua-tlalnepantla",
+      "archivo": "portadas/rotativo-20261116-pm-180446/01-corte-agua-tlalnepantla.webp",
+      "archivo_png": "portadas/rotativo-20261116-pm-180446/01-corte-agua-tlalnepantla.png",
+      "imagen_utilizada": "https://static.nmas.com.mx/Nmas/cms/Corte-Agua-Tlalnepantla-noviembre-2026-620x620.jpg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261116-pm-180446/01-corte-agua-tlalnepantla.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261116-pm-180446/01-corte-agua-tlalnepantla.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261116-pm-180446/01-corte-agua-tlalnepantla.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261116-pm-180446/01-corte-agua-tlalnepantla.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 129784,
+      "bytes_png": 789183,
+      "ahorro_pct": 84,
+      "objetivo_700kb": true
+    }
+  ],
+  "errores": [
+    {
+      "slug": "02-cierres-colector-las-jaras",
+      "titulo": "Toluca cerrará dos vialidades por obras del colector Las Jaras",
+      "error": "No se pudo generar portada 02-cierres-colector-las-jaras: agotadas 1 URL(s) verificadas. [{\"candidata\":1,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":1,\"intento\":2,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"}]"
+    }
+  ]
+}
