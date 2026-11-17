@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "titulo": "Hacienda rechaza desvío por 138.9 millones observados en el INDAABIN",
+      "seccion": "Economía",
+      "imagen": "https://mexico.quadratin.com.mx/www/wp-content/uploads/2026/11/INDAABIN-1160x700.png",
+      "imagenes_alternativas": [
+        "https://lopezdoriga.com/wp-content/uploads/2026/11/indaabin-instituto-de-administracion-y-avaluos-de-bienes-nacionales.jpg",
+        "https://www.zocalo.com.mx/wp-content/uploads/2026/11/Hacienda-2.jpg"
+      ],
+      "slug": "01-hacienda-observaciones-indaabin"
+    },
+    {
+      "titulo": "México y China buscan ampliar cooperación en tecnología y comercio",
+      "seccion": "Política",
+      "imagen": "https://editorial.aristeguinoticias.com/wp-content/uploads/2026/11/claudia-sheinbaum-xi-jinping-reunion-17112026-720x450.jpg",
+      "imagenes_alternativas": [
+        "https://static.nmas.com.mx/Nmas/cms/Sheinbaum%20Xi%20Jinping%20IA%20Sargazo%20Inversiones-620x620.jpg"
+      ],
+      "slug": "02-sheinbaum-xi-jinping-cooperacion"
+    },
+    {
+      "titulo": "Sheinbaum y Carney revisan comercio e inversiones entre México y Canadá",
+      "seccion": "Política",
+      "imagen": "https://static.nmas.com.mx/Nmas/cms/carney-sheinbaum-canada-mexico-apec-620x620.jpg",
+      "slug": "03-mexico-canada-plan-bilateral"
+    }
+  ]
+}
