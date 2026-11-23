@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261123-am-061225",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 2,
+  "solicitadas": 3,
+  "parcial": true,
+  "generado": "2026-11-23T12:04:19.119Z",
+  "portadas": [
+    {
+      "titulo": "Gobernación unifica siete trámites para asignar la CURP",
+      "seccion": "Sociedad",
+      "slug": "01-gobernacion-unifica-tramites-curp",
+      "archivo": "portadas/rotativo-20261123-am-061225/01-gobernacion-unifica-tramites-curp.webp",
+      "archivo_png": "portadas/rotativo-20261123-am-061225/01-gobernacion-unifica-tramites-curp.png",
+      "imagen_utilizada": "https://pbs.twimg.com/media/GKA6gp8bkAAPlGH.jpg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261123-am-061225/01-gobernacion-unifica-tramites-curp.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261123-am-061225/01-gobernacion-unifica-tramites-curp.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261123-am-061225/01-gobernacion-unifica-tramites-curp.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261123-am-061225/01-gobernacion-unifica-tramites-curp.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 98418,
+      "bytes_png": 534980,
+      "ahorro_pct": 82,
+      "objetivo_700kb": true
+    },
+    {
+      "titulo": "SAT activa aviso QR para cruces aduaneros",
+      "seccion": "Economía",
+      "slug": "03-sat-aviso-qr-cruces-aduaneros",
+      "archivo": "portadas/rotativo-20261123-am-061225/03-sat-aviso-qr-cruces-aduaneros.webp",
+      "archivo_png": "portadas/rotativo-20261123-am-061225/03-sat-aviso-qr-cruces-aduaneros.png",
+      "imagen_utilizada": "https://cdn.prod.website-files.com/673655d332b61ff7b2c86b10/6753525c1764108566f53804_67534dc4dbcfc74105528a5e_631a190949bcd3d9c35f9242_pQqEv2p3oJ31-YIwY2ihDVKsekBi3tjvRPHnXoO1Z55W44hS6hQM-bKB2QiWpqQqa2vtprdzfoGBafqCAGLtUUYtGPHfybTibnwyPTI2iO52rDcEmvDI7BlImupF4DjDx9b8cN_u9hV3nvRU9SDGPVaL24V3KFkb5WBl9Q5k-WBUEEREo1ATSxeH8Q.png",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261123-am-061225/03-sat-aviso-qr-cruces-aduaneros.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261123-am-061225/03-sat-aviso-qr-cruces-aduaneros.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261123-am-061225/03-sat-aviso-qr-cruces-aduaneros.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261123-am-061225/03-sat-aviso-qr-cruces-aduaneros.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 79836,
+      "bytes_png": 296677,
+      "ahorro_pct": 73,
+      "objetivo_700kb": true
+    }
+  ],
+  "errores": [
+    {
+      "slug": "02-fgr-reglas-denuncias-fiscanet",
+      "titulo": "FGR fija reglas para denuncias federales en línea",
+      "error": "No se pudo generar portada 02-fgr-reglas-denuncias-fiscanet: agotadas 1 URL(s) verificadas. [{\"candidata\":1,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":1,\"intento\":2,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"}]"
+    }
+  ]
+}
