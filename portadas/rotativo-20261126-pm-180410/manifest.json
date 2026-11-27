@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "solicitud": "rotativo-20261126-pm-180410",
+  "plantilla": "https://iniwor.github.io/r_news/",
+  "ref": "main",
+  "total": 2,
+  "solicitadas": 3,
+  "parcial": true,
+  "generado": "2026-11-27T00:08:00.440Z",
+  "portadas": [
+    {
+      "titulo": "Localizan sin vida a trabajador desaparecido tras incendio en Toluca",
+      "seccion": "Seguridad",
+      "slug": "01-trabajador-desaparecido-incendio-toluca",
+      "archivo": "portadas/rotativo-20261126-pm-180410/01-trabajador-desaparecido-incendio-toluca.webp",
+      "archivo_png": "portadas/rotativo-20261126-pm-180410/01-trabajador-desaparecido-incendio-toluca.png",
+      "imagen_utilizada": "https://i0.wp.com/adnoticias.mx/wp-content/uploads/2026/11/incendio-en-Toluca.-bomberos5.jpg?fit=1600%2C900&amp;ssl=1",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261126-pm-180410/01-trabajador-desaparecido-incendio-toluca.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261126-pm-180410/01-trabajador-desaparecido-incendio-toluca.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261126-pm-180410/01-trabajador-desaparecido-incendio-toluca.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261126-pm-180410/01-trabajador-desaparecido-incendio-toluca.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 132370,
+      "bytes_png": 758527,
+      "ahorro_pct": 83,
+      "objetivo_700kb": true
+    },
+    {
+      "titulo": "Habilitarán refugios para personas en situación de calle en Toluca",
+      "seccion": "Sociedad",
+      "slug": "02-refugios-personas-calle-toluca",
+      "archivo": "portadas/rotativo-20261126-pm-180410/02-refugios-personas-calle-toluca.webp",
+      "archivo_png": "portadas/rotativo-20261126-pm-180410/02-refugios-personas-calle-toluca.png",
+      "imagen_utilizada": "https://mexiquense.app/uploads/20_20261126190543_5369/f1ab6651-5e56-4d97-830d-f35d9eab4ffa.jpg",
+      "alternativa_usada": false,
+      "intentos_imagen": 1,
+      "url_directa": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261126-pm-180410/02-refugios-personas-calle-toluca.webp",
+      "url_webp": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261126-pm-180410/02-refugios-personas-calle-toluca.webp",
+      "url_png": "https://raw.githubusercontent.com/iniwor/r_news/main/portadas/rotativo-20261126-pm-180410/02-refugios-personas-calle-toluca.png",
+      "url_pages": "https://iniwor.github.io/r_news/portadas/rotativo-20261126-pm-180410/02-refugios-personas-calle-toluca.webp",
+      "width": 1080,
+      "height": 1350,
+      "formato": "webp",
+      "calidad": 90,
+      "bytes": 141512,
+      "bytes_png": 778555,
+      "ahorro_pct": 82,
+      "objetivo_700kb": true
+    }
+  ],
+  "errores": [
+    {
+      "slug": "03-vecinas-atizapan-red-apoyo-mujeres",
+      "titulo": "Vecinas de Atizapán amplían red de apoyo para mujeres",
+      "error": "No se pudo generar portada 03-vecinas-atizapan-red-apoyo-mujeres: agotadas 1 URL(s) verificadas. [{\"candidata\":1,\"intento\":1,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"},{\"candidata\":1,\"intento\":2,\"error\":\"Fotografía no cargada: [{\\\"ok\\\":false,\\\"error\\\":\\\"No se pudo cargar la imagen.\\\"}]\"}]"
+    }
+  ]
+}
